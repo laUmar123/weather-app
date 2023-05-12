@@ -27,3 +27,96 @@ body {
     grid-template-rows: 0.5fr 5fr 5fr 0.5fr;
     row-gap: 2rem;
 }
+
+header {
+    grid-row: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.3rem;
+}
+
+.title-end {
+    color: var(--orange);
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+    display: none;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    width: 25rem;
+    position: relative;
+    transform: translateY(4px);
+}
+
+#search-bar {
+    border-radius: 20px;
+    border: none;
+    width: 100%;
+    height: 2.5rem;
+    background-color: var(--search-background-color);
+    padding: 0 0.8rem;
+    color: white;
+    font-size: 1rem;
+}
+
+#search-bar::placeholder {
+    color: white;
+}
+
+.search-button {
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    z-index: 1;
+    height: 1.5rem;
+    left: 88%;
+    cursor: pointer;
+}
+
+.change-degrees {
+    width: 20rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 0.5rem;
+}
+
+.btn {
+    cursor: pointer;
+    border: none;
+    color: white;
+    font-weight: bold;
+}
+
+.fahrenheit-btn,
+.celsius-btn {
+    height: 2rem;
+    width: 4rem;
+    border-radius: 20px;
+    background-color: var(--search-background-color);
+    font-size: 1rem;
+    transition: border 60ms ease-in;
+}
+
+.fahrenheit-btn:hover,
+.celsius-btn:hover,
+.daily-weather-btn:hover,
+.hourly-weather-btn:hover,
+.active {
+    border: 2px solid white;
+}
