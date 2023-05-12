@@ -95,3 +95,5 @@ function inputGenerator(attributes) {
     attributes.forEach(attribute => input.setAttribute(attribute[0], attribute[1]));
     return input;
 }
+
+export { divGenerator, imgGenerator, headingGenerator, buttonGenerator, spanGenerator, inputGenerator, formGenerator }
