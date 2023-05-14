@@ -14,7 +14,7 @@ function headerFormSection() {
 
 function headerButtons() {
     const buttonsContainer = divGenerator(['change-degrees']);
-    buttonsContainer.append(buttonGenerator(['celsius-btn', 'btn', 'active'], '°C'), buttonGenerator(['fahrenheit-btn', 'btn', 'active'], '°F'));
+    buttonsContainer.append(buttonGenerator(['celsius-btn', 'btn', 'active'], '°C'), buttonGenerator(['fahrenheit-btn', 'btn'], '°F'));
     return buttonsContainer;
 }
 
