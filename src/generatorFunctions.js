@@ -25,7 +25,7 @@ function divGenerator(classes) {
  * @param {Array} classes an array of classes that need to be added to the img
  * @returns an img element
  */
-function imgGenerator(src, alt, classes) {
+function imgGenerator(src, alt = '', classes) {
     const img = document.createElement('img');
     img.src = src;
     img.alt = alt;
@@ -40,10 +40,11 @@ function imgGenerator(src, alt, classes) {
  * @param {string} text the text the heading needs to display 
  * @returns a heading DOM element
  */
-function headingGenerator(headingSize, classes, text, spanElement) {
+function headingGenerator(headingSize, classes, text, spanElementPreppend = '', spanElementAppend = '') {
     const heading = document.createElement(headingSize);
     heading.innerHTML = text;
-    heading.append(spanElement)
+    heading.prepend(spanElementPreppend)
+    heading.append(spanElementAppend)
     addClassesToElement(classes, heading);
     return heading;
 }

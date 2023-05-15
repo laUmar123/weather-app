@@ -2,7 +2,7 @@ import { divGenerator, imgGenerator, headingGenerator, spanGenerator, inputGener
 
 function titleSection() {
     const titleContainer = divGenerator(['title']);
-    titleContainer.append(imgGenerator('./../src/assets/page-icon.png', 'a circular icon depicting all 4 seasons', ['main-icon']), headingGenerator('h1', ['page-title'], 'Weather', spanGenerator(['title-end'], 'Watch')));
+    titleContainer.append(imgGenerator('./../src/assets/page-icon.png', 'a circular icon depicting all 4 seasons', ['main-icon']), headingGenerator('h1', ['page-title'], 'Weather', undefined, spanGenerator(['title-end'], 'Watch')));
     return titleContainer;
 }
 

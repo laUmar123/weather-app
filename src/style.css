@@ -60,6 +60,7 @@ input[type="search"]::-webkit-search-results-decoration {
     width: 25rem;
     position: relative;
     transform: translateY(4px);
+    margin-right: 55px;
 }
 
 #search-bar {
