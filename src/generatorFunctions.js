@@ -118,4 +118,4 @@ function checkCategoryOfUv(uvNum) {
     }
 }
 
-export { divGenerator, imgGenerator, headingGenerator, buttonGenerator, spanGenerator, inputGenerator, formGenerator }
+export { divGenerator, imgGenerator, headingGenerator, buttonGenerator, spanGenerator, inputGenerator, formGenerator, checkCategoryOfUv, paragraphGenerator }

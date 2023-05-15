@@ -49,7 +49,36 @@ async function onLoadDefaultWeather() {
     const londonInfo = await response.json();
     currentDayInformationContainer.append(displayLocationDetails(retrieveCity(londonInfo), retrieveCountry(londonInfo), createStandardDate(retrieveDateAndTimeArr(londonInfo)[0]), createStandardTime(retrieveDateAndTimeArr(londonInfo)[1])));
     currentDayInformationContainer.append(currentTempDetailsSection(tempDetailsSection(londonInfo.current.condition.icon, londonInfo.current.temp_c), tempConditionsSection(londonInfo.current.condition.text, londonInfo.current.feelslike_c)));
+    currentDayInformationContainer.append(extraInformationSection(windInformation(retrieveWindDegrees(londonInfo), retrieveWindSpeed(londonInfo)), humidityInformation(retrieveHumidity(londonInfo)),
+        uvInformation(retrieveUvNum(londonInfo))));
 };
 
-export { currentDayInformationContainer, onLoadDefaultWeather };
+function extraInformationSection(append, append2, append3) {
+    const extraInformationContainer = divGenerator(['extra-information']);
+    extraInformationContainer.append(append, append2, append3);
+    return extraInformationContainer;
+};
 
+function windInformation(windArrowRotation, windSpeed) {
+    const windContainer = divGenerator(['wind']);
+    const windInformationContainer = divGenerator(['wind-information']);
+    const windSpeedSpan = spanGenerator(['wind-num'], windSpeed);
+    windInformationContainer.append(imgGenerator('./../src/assets/arrow.png', 'An arrow rotated by the window direction degrees', ['wind-direction'], windArrowRotation), paragraphGenerator(['wind-speed'], 'mph', windSpeedSpan));
+    windContainer.append(headingGenerator('h5', [], 'Wind'), windInformationContainer);
+    return windContainer;
+};
+
+function humidityInformation(humidityNumber) {
+    const humidityContainer = divGenerator(['humidity']);
+    const humidity = spanGenerator(['humidity-number'], humidityNumber)
+    humidityContainer.append(headingGenerator('h5', [], 'Humidity'), paragraphGenerator(['humidity-percentage'], '%', humidity));
+    return humidityContainer;
+}
+
+function uvInformation(uvIndexNumber) {
+    const uvContainer = divGenerator(['uv-index']);
+    uvContainer.append(headingGenerator('h5', [], 'UV Index'), paragraphGenerator(['uv', checkCategoryOfUv(uvIndexNumber)], uvIndexNumber));
+    return uvContainer;
+}
+
+export { currentDayInformationContainer, onLoadDefaultWeather };
