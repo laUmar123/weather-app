@@ -1,5 +1,5 @@
 import { checkCategoryOfUv, divGenerator, headingGenerator, imgGenerator, paragraphGenerator, spanGenerator } from './generatorFunctions';
-import { createStandardDate, createStandardTime, retrieveCity, retrieveCountry, retrieveDateAndTimeArr, retrieveMethodOfMeasurement, isMethodOfMeasurementCelsius, retrieveWindDegrees, retrieveWindSpeed, retrieveHumidity, retrieveUvNum } from './retrieveInformation'
+import { createStandardDate, createStandardTime, retrieveCity, retrieveCountry, retrieveDateAndTimeArr, retrieveMethodOfMeasurement, isMethodOfMeasurementCelsius, retrieveWindDegrees, retrieveWindSpeed, retrieveHumidity, retrieveUvNum, retrieveVisibilityDistance } from './retrieveInformation'
 
 const currentDayInformationContainer = divGenerator(['current-day-information']);
 
@@ -50,12 +50,13 @@ async function onLoadDefaultWeather() {
     currentDayInformationContainer.append(displayLocationDetails(retrieveCity(londonInfo), retrieveCountry(londonInfo), createStandardDate(retrieveDateAndTimeArr(londonInfo)[0]), createStandardTime(retrieveDateAndTimeArr(londonInfo)[1])));
     currentDayInformationContainer.append(currentTempDetailsSection(tempDetailsSection(londonInfo.current.condition.icon, londonInfo.current.temp_c), tempConditionsSection(londonInfo.current.condition.text, londonInfo.current.feelslike_c)));
     currentDayInformationContainer.append(extraInformationSection(windInformation(retrieveWindDegrees(londonInfo), retrieveWindSpeed(londonInfo)), humidityInformation(retrieveHumidity(londonInfo)),
-        uvInformation(retrieveUvNum(londonInfo))));
+        uvInformation(retrieveUvNum(londonInfo)), visibilityInformation(retrieveVisibilityDistance(londonInfo))));
+
 };
 
-function extraInformationSection(append, append2, append3) {
+function extraInformationSection(append, append2, append3, append4, append5, append6, append7, append8, append9) {
     const extraInformationContainer = divGenerator(['extra-information']);
-    extraInformationContainer.append(append, append2, append3);
+    extraInformationContainer.append(append, append2, append3, append4, append5, append6, append7, append8, append9);
     return extraInformationContainer;
 };
 
@@ -81,4 +82,12 @@ function uvInformation(uvIndexNumber) {
     return uvContainer;
 }
 
+function visibilityInformation(visibilityDistance) {
+    const visibilityContainer = divGenerator(['visibility']);
+    const visiblityDistanceSpan = spanGenerator(['visibility-num'], visibilityDistance);
+    visibilityContainer.append(headingGenerator('h5', [], 'Visibility'), paragraphGenerator(['visibility-distance'], 'km', visiblityDistanceSpan));
+    return visibilityContainer;
+}
+
 export { currentDayInformationContainer, onLoadDefaultWeather };
+
