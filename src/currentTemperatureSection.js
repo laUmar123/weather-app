@@ -1,5 +1,5 @@
 import { checkCategoryOfUv, divGenerator, headingGenerator, imgGenerator, paragraphGenerator, spanGenerator } from './generatorFunctions';
-import { createStandardDate, createStandardTime, retrieveCity, retrieveCountry, retrieveDateAndTimeArr, retrieveMethodOfMeasurement, isMethodOfMeasurementCelsius, retrieveWindDegrees, retrieveWindSpeed, retrieveHumidity, retrieveUvNum, retrieveVisibilityDistance } from './retrieveInformation'
+import { createStandardDate, createStandardTime, retrieveCity, retrieveCountry, retrieveDateAndTimeArr, retrieveMethodOfMeasurement, isMethodOfMeasurementCelsius, retrieveWindDegrees, retrieveWindSpeed, retrieveHumidity, retrieveUvNum, retrieveVisibilityDistance, retrieveCloudinessPercentage } from './retrieveInformation'
 
 const currentDayInformationContainer = divGenerator(['current-day-information']);
 
@@ -50,7 +50,7 @@ async function onLoadDefaultWeather() {
     currentDayInformationContainer.append(displayLocationDetails(retrieveCity(londonInfo), retrieveCountry(londonInfo), createStandardDate(retrieveDateAndTimeArr(londonInfo)[0]), createStandardTime(retrieveDateAndTimeArr(londonInfo)[1])));
     currentDayInformationContainer.append(currentTempDetailsSection(tempDetailsSection(londonInfo.current.condition.icon, londonInfo.current.temp_c), tempConditionsSection(londonInfo.current.condition.text, londonInfo.current.feelslike_c)));
     currentDayInformationContainer.append(extraInformationSection(windInformation(retrieveWindDegrees(londonInfo), retrieveWindSpeed(londonInfo)), humidityInformation(retrieveHumidity(londonInfo)),
-        uvInformation(retrieveUvNum(londonInfo)), visibilityInformation(retrieveVisibilityDistance(londonInfo))));
+        uvInformation(retrieveUvNum(londonInfo)), visibilityInformation(retrieveVisibilityDistance(londonInfo)), cloudinessInformation(retrieveCloudinessPercentage(londonInfo))));
 
 };
 
@@ -89,5 +89,13 @@ function visibilityInformation(visibilityDistance) {
     return visibilityContainer;
 }
 
+function cloudinessInformation(cloudPercentage) {
+    const cloudinessContainer = divGenerator(['cloudiness']);
+    const cloudinessPercentageSpan = spanGenerator(['cloudiness-num'], cloudPercentage);
+    cloudinessContainer.append(headingGenerator('h5', [], 'Cloudiness'), paragraphGenerator(['cloudiness-percentage'], '%', cloudinessPercentageSpan));
+    return cloudinessContainer;
+}
+
 export { currentDayInformationContainer, onLoadDefaultWeather };
+
 

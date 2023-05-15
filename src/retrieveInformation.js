@@ -89,4 +89,8 @@ function retrieveVisibilityDistance(obj) {
     return obj.current.vis_km;
 }
 
-export { retrieveVisibilityDistance, retrieveUvNum, createStandardDate, createStandardTime, retrieveCity, retrieveCountry, retrieveDateAndTimeArr, retrieveMethodOfMeasurement, isMethodOfMeasurementCelsius, retrieveWindDegrees, retrieveWindSpeed, retrieveHumidity }
+function retrieveCloudinessPercentage(obj) {
+    return obj.current.cloud;
+}
+
+export { retrieveCloudinessPercentage, retrieveVisibilityDistance, retrieveUvNum, createStandardDate, createStandardTime, retrieveCity, retrieveCountry, retrieveDateAndTimeArr, retrieveMethodOfMeasurement, isMethodOfMeasurementCelsius, retrieveWindDegrees, retrieveWindSpeed, retrieveHumidity }
