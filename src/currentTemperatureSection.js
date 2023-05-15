@@ -1,5 +1,5 @@
 import { checkCategoryOfUv, divGenerator, headingGenerator, imgGenerator, paragraphGenerator, spanGenerator } from './generatorFunctions';
-import { createStandardDate, createStandardTime, retrieveCity, retrieveCountry, retrieveDateAndTimeArr, retrieveMethodOfMeasurement, isMethodOfMeasurementCelsius, retrieveWindDegrees, retrieveWindSpeed, retrieveHumidity, retrieveUvNum, retrieveVisibilityDistance, retrieveCloudinessPercentage } from './retrieveInformation'
+import { createStandardDate, createStandardTime, retrieveCity, retrieveCountry, retrieveDateAndTimeArr, retrieveMethodOfMeasurement, isMethodOfMeasurementCelsius, retrieveWindDegrees, retrieveWindSpeed, retrieveHumidity, retrieveUvNum, retrieveVisibilityDistance, retrieveCloudinessPercentage, retrieveChanceOfRain } from './retrieveInformation'
 
 const currentDayInformationContainer = divGenerator(['current-day-information']);
 
@@ -50,7 +50,7 @@ async function onLoadDefaultWeather() {
     currentDayInformationContainer.append(displayLocationDetails(retrieveCity(londonInfo), retrieveCountry(londonInfo), createStandardDate(retrieveDateAndTimeArr(londonInfo)[0]), createStandardTime(retrieveDateAndTimeArr(londonInfo)[1])));
     currentDayInformationContainer.append(currentTempDetailsSection(tempDetailsSection(londonInfo.current.condition.icon, londonInfo.current.temp_c), tempConditionsSection(londonInfo.current.condition.text, londonInfo.current.feelslike_c)));
     currentDayInformationContainer.append(extraInformationSection(windInformation(retrieveWindDegrees(londonInfo), retrieveWindSpeed(londonInfo)), humidityInformation(retrieveHumidity(londonInfo)),
-        uvInformation(retrieveUvNum(londonInfo)), visibilityInformation(retrieveVisibilityDistance(londonInfo)), cloudinessInformation(retrieveCloudinessPercentage(londonInfo))));
+        uvInformation(retrieveUvNum(londonInfo)), visibilityInformation(retrieveVisibilityDistance(londonInfo)), cloudinessInformation(retrieveCloudinessPercentage(londonInfo)), rainInformation(retrieveChanceOfRain(londonInfo))));
 
 };
 
@@ -96,6 +96,12 @@ function cloudinessInformation(cloudPercentage) {
     return cloudinessContainer;
 }
 
-export { currentDayInformationContainer, onLoadDefaultWeather };
+function rainInformation(rainPercentage) {
+    const rainContainer = divGenerator(['chance-of-rain']);
+    const rainPercentageSpan = spanGenerator(['chance-of-rain-num'], rainPercentage);
+    rainContainer.append(headingGenerator('h5', [], 'Chance of Rain'), paragraphGenerator(['chance-of-rain-percentage'], '%', rainPercentageSpan));
+    return rainContainer;
+}
 
+export { currentDayInformationContainer, onLoadDefaultWeather };
 

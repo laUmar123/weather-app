@@ -93,4 +93,8 @@ function retrieveCloudinessPercentage(obj) {
     return obj.current.cloud;
 }
 
-export { retrieveCloudinessPercentage, retrieveVisibilityDistance, retrieveUvNum, createStandardDate, createStandardTime, retrieveCity, retrieveCountry, retrieveDateAndTimeArr, retrieveMethodOfMeasurement, isMethodOfMeasurementCelsius, retrieveWindDegrees, retrieveWindSpeed, retrieveHumidity }
+function retrieveChanceOfRain(obj) {
+    return obj.forecast.forecastday[0].day.daily_chance_of_rain;
+}
+
+export { retrieveChanceOfRain, retrieveCloudinessPercentage, retrieveVisibilityDistance, retrieveUvNum, createStandardDate, createStandardTime, retrieveCity, retrieveCountry, retrieveDateAndTimeArr, retrieveMethodOfMeasurement, isMethodOfMeasurementCelsius, retrieveWindDegrees, retrieveWindSpeed, retrieveHumidity }
