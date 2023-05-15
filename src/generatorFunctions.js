@@ -98,4 +98,24 @@ function inputGenerator(attributes) {
     return input;
 }
 
+function paragraphGenerator(classes, text, spanElementPreppend = '', spanElementAppend = '') {
+    const paragraph = document.createElement('p');
+    addClassesToElement(classes, paragraph);
+    paragraph.innerText = text;
+    paragraph.prepend(spanElementPreppend)
+    paragraph.append(spanElementAppend)
+    return paragraph;
+}
+
+function checkCategoryOfUv(uvNum) {
+    switch (true) {
+        case uvNum <= 2:
+            return 'safe';
+        case uvNum <= 7:
+            return 'amber';
+        case uvNum >= 8:
+            return 'danger';
+    }
+}
+
 export { divGenerator, imgGenerator, headingGenerator, buttonGenerator, spanGenerator, inputGenerator, formGenerator }

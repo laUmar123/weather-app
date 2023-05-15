@@ -69,4 +69,20 @@ function isMethodOfMeasurementCelsius() {
     else if (document.querySelector('.fahrenheit-btn').classList.contains('active')) return false;
 }
 
-export { retrieveUvNum, createStandardDate, createStandardTime, retrieveCity, retrieveCountry, retrieveDateAndTimeArr, retrieveMethodOfMeasurement, isMethodOfMeasurementCelsius }
+function retrieveWindDegrees(obj) {
+    return obj.current.wind_degree;
+};
+
+function retrieveWindSpeed(obj) {
+    return obj.current.wind_mph;
+};
+
+function retrieveHumidity(obj) {
+    return obj.current.humidity
+}
+
+function retrieveUvNum(obj) {
+    return obj.current.uv;
+}
+
+export { retrieveUvNum, createStandardDate, createStandardTime, retrieveCity, retrieveCountry, retrieveDateAndTimeArr, retrieveMethodOfMeasurement, isMethodOfMeasurementCelsius, retrieveWindDegrees, retrieveWindSpeed, retrieveHumidity }

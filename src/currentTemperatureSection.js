@@ -21,8 +21,35 @@ function displayLocationDetails(city = '', country = '', day = '', time = '') {
     locationDetails.append(cityDetailsHeader, dayDetailsHeader);
     return locationDetails;
 };
+
+function tempDetailsSection(image, temp) {
+    const tempDetailsContainer = divGenerator(['temp-details']);
+    const currentTemp = spanGenerator(['temp'], temp);
+    tempDetailsContainer.append(imgGenerator(image, undefined, ['image-weather-description']), headingGenerator('h2', ['current-temp'], '°', currentTemp, retrieveMethodOfMeasurement()));
+    return tempDetailsContainer;
+};
+
+function tempConditionsSection(description, feelsLikeTemp) {
+    const tempConditionsContainer = divGenerator(['temp-conditions']);
+    const feelsLikeHeader = document.createElement('h4');
+    feelsLikeHeader.classList.add('feels-like');
+    feelsLikeHeader.insertAdjacentHTML('afterbegin', `Feels like <span class="feels-like-temp">${feelsLikeTemp}</span>°<span class="method-of-measurement">${isMethodOfMeasurementCelsius() === true ? 'C' : 'F'}</span>`);
+    tempConditionsContainer.append(headingGenerator('h3', ['temp-description'], description), feelsLikeHeader);
+    return tempConditionsContainer;
+};
+
+function currentTempDetailsSection(tempDetailsSection, tempConditionsSection) {
+    const currentTempDetailsContainer = divGenerator(['current-temp-details']);
+    currentTempDetailsContainer.append(tempDetailsSection, tempConditionsSection);
+    return currentTempDetailsContainer;
+};
+
 async function onLoadDefaultWeather() {
     const response = await fetch('https://api.weatherapi.com/v1/forecast.json?key=d26a8a90752f45c2a03154907230505&q=london&days=7&aqi=no&alerts=no', { mode: 'cors' });
     const londonInfo = await response.json();
     currentDayInformationContainer.append(displayLocationDetails(retrieveCity(londonInfo), retrieveCountry(londonInfo), createStandardDate(retrieveDateAndTimeArr(londonInfo)[0]), createStandardTime(retrieveDateAndTimeArr(londonInfo)[1])));
+    currentDayInformationContainer.append(currentTempDetailsSection(tempDetailsSection(londonInfo.current.condition.icon, londonInfo.current.temp_c), tempConditionsSection(londonInfo.current.condition.text, londonInfo.current.feelslike_c)));
 };
+
+export { currentDayInformationContainer, onLoadDefaultWeather };
+
