@@ -25,11 +25,12 @@ function divGenerator(classes) {
  * @param {Array} classes an array of classes that need to be added to the img
  * @returns an img element
  */
-function imgGenerator(src, alt = '', classes) {
+function imgGenerator(src, alt = '', classes, rotation = 0) {
     const img = document.createElement('img');
     img.src = src;
     img.alt = alt;
     addClassesToElement(classes, img);
+    img.style.rotate = `${rotation}deg`
     return img;
 }
 

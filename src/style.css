@@ -121,3 +121,134 @@ input[type="search"]::-webkit-search-results-decoration {
 .active {
     border: 2px solid white;
 }
+
+.current-day-information {
+    justify-self: center;
+    grid-row: 2;
+    display: grid;
+    grid-template-rows: 1fr 4fr;
+    grid-template-columns: 1fr 2fr;
+    width: 43rem;
+    height: 30rem;
+}
+
+.location-details {
+    grid-row: 1;
+    grid-column: 1 / -1;
+    justify-self: center;
+    text-align: center;
+    padding: 1rem;
+}
+
+.city-details {
+    font-size: 2.5rem;
+}
+
+.day-details {
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+    color: var(--faded-white);
+    font-weight: 500;
+}
+
+.time-details {
+    border-left: 2px solid var(--faded-white);
+    padding-left: 7px;
+    margin-left: 7px;
+}
+
+.current-temp-details {
+    grid-row: 2;
+    grid-column: 1;
+    justify-self: center;
+    align-self: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 0;
+}
+
+.temp-details {
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
+    gap: 0.3rem;
+}
+
+.temp-details>img {
+    height: 6rem;
+    width: 6rem;
+}
+
+.temp-description {
+    font-size: 1.7rem;
+    font-weight: 400;
+}
+
+.feels-like,
+.general-description {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--faded-white);
+}
+
+.extra-information {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    padding: 0.5rem;
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+}
+
+.extra-information>div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.wind-information {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.wind-direction {
+    height: 1.7rem;
+}
+
+.extra-information h5,
+.extra-information p {
+    font-weight: 600;
+}
+
+.extra-information h5 {
+    font-size: 1.2rem;
+    color: var(--faded-white);
+}
+
+.extra-information p {
+    font-size: 1.5rem;
+}
+
+.safe,
+.amber,
+.danger {
+    border-radius: 999px;
+    width: 40%;
+    margin: 0 auto;
+}
+
+.safe {
+    background-color: rgb(51, 192, 51);
+}
+
+.amber {
+    background-color: orange;
+}
+
+.danger {
+    background-color: rgb(192, 0, 0);
+}

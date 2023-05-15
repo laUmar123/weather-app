@@ -69,4 +69,4 @@ function isMethodOfMeasurementCelsius() {
     else if (document.querySelector('.fahrenheit-btn').classList.contains('active')) return false;
 }
 
-export { createStandardDate, createStandardTime, retrieveCity, retrieveCountry, retrieveDateAndTimeArr, retrieveMethodOfMeasurement, isMethodOfMeasurementCelsius }
+export { retrieveUvNum, createStandardDate, createStandardTime, retrieveCity, retrieveCountry, retrieveDateAndTimeArr, retrieveMethodOfMeasurement, isMethodOfMeasurementCelsius }
