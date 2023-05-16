@@ -138,7 +138,7 @@ function retrieveChanceOfRain(obj) {
  * @returns a string that is the sunrise time 
  */
 function retrieveSunriseTime(obj) {
-    return obj.forecast.forecastday[0].astro.sunrise;
+    return obj.forecast.forecastday[0].astro.sunrise.slice(0, -3);
 };
 
 /**
@@ -147,7 +147,10 @@ function retrieveSunriseTime(obj) {
  * @returns a string that is the sunset time
  */
 function retrieveSunsetTime(obj) {
-    return obj.forecast.forecastday[0].astro.sunset;
+    const sunset = obj.forecast.forecastday[0].astro.sunset;
+    const sunsetHour = Number(sunset[0] + sunset[1]);
+    const sunsetHour24 = sunsetHour + 12;
+    return sunsetHour24 + sunset.slice(2, -3);
 };
 
 /**
