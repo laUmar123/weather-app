@@ -132,4 +132,32 @@ function retrieveChanceOfRain(obj) {
     return obj.forecast.forecastday[0].day.daily_chance_of_rain;
 }
 
-export { retrieveChanceOfRain, retrieveCloudinessPercentage, retrieveVisibilityDistance, retrieveUvNum, createStandardDate, createStandardTime, retrieveCity, retrieveCountry, retrieveDateAndTimeArr, retrieveMethodOfMeasurement, isMethodOfMeasurementCelsius, retrieveWindDegrees, retrieveWindSpeed, retrieveHumidity }
+/**
+ * This function is used to retrieve the sunrise time from the api response
+ * @param {object} obj the object that we want to retrieve the value from 
+ * @returns a string that is the sunrise time 
+ */
+function retrieveSunriseTime(obj) {
+    return obj.forecast.forecastday[0].astro.sunrise;
+}
+
+/**
+ * This function is used to retrieve the sunset time from the api response
+ * @param {object} obj the object that we want to retrieve the value from 
+ * @returns a string that is the sunset time
+ */
+function retrieveSunsetTime(obj) {
+    return obj.forecast.forecastday[0].astro.sunset;
+}
+
+/**
+ * This function is used to retrieve the current moon phase from the api response
+ * @param {object} obj the object that we want to retrieve the value from 
+ * @returns a string that is the current moon phase
+ */
+function retrieveMoonPhase(obj) {
+    return obj.forecast.forecastday[0].astro.moon_phase;
+
+}
+
+export { retrieveSunsetTime, retrieveMoonPhase, retrieveSunriseTime, retrieveChanceOfRain, retrieveCloudinessPercentage, retrieveVisibilityDistance, retrieveUvNum, createStandardDate, createStandardTime, retrieveCity, retrieveCountry, retrieveDateAndTimeArr, retrieveMethodOfMeasurement, isMethodOfMeasurementCelsius, retrieveWindDegrees, retrieveWindSpeed, retrieveHumidity }
