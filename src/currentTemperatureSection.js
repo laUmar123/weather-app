@@ -58,9 +58,134 @@ function tempConditionsSection(description, feelsLikeTemp) {
  */
 function currentTempDetailsSection(tempDetailsSection, tempConditionsSection) {
     const currentTempDetailsContainer = divGenerator(['current-temp-details']);
-    console.log(typeof currentTempDetailsContainer);
     currentTempDetailsContainer.append(tempDetailsSection, tempConditionsSection);
     return currentTempDetailsContainer;
+};
+
+/**
+ * This function is used to append all 9 arguments into the extraInformationContainer that will then be displayed onto the screen
+ * @param {object} windInfo a DOM element object that is supposed to be the DOM element displaying wind direction and speed
+ * @param {object} humidityInfo a DOM element object that is supposed to be the DOM element displaying humidity percentage
+ * @param {object} uvInfo a DOM element object that is supposed to be the DOM element displaying uv-index 
+ * @param {object} visibilityInfo a DOM element object that is supposed to be the DOM element displaying visibility distance
+ * @param {object} cloudinessInfo a DOM element object that is supposed to be the DOM element displaying cloudiness percentage
+ * @param {object} rainInfo a DOM element object that is supposed to be the DOM element displaying the chance of rain
+ * @param {object} sunriseInfo a DOM element object that is supposed to be the DOM element displaying sunrise time
+ * @param {object} sunsetInfo a DOM element object that is supposed to be the DOM element displaying sunset time
+ * @param {object} moonInfo a DOM element object that is supposed to be the DOM element displaying moon-phase information
+ * @returns a DOM element object that contains 9 children, which are all the arguments that have been passed
+ */
+function extraInformationSection(windInfo, humidityInfo, uvInfo, visibilityInfo, cloudinessInfo, rainInfo, sunriseInfo, sunsetInfo, moonInfo) {
+    const extraInformationContainer = divGenerator(['extra-information']);
+    extraInformationContainer.append(windInfo, humidityInfo, uvInfo, visibilityInfo, cloudinessInfo, rainInfo, sunriseInfo, sunsetInfo, moonInfo);
+    return extraInformationContainer;
+};
+
+/**
+ * This function creates a div element, and appends a <h5></h5> and <p></p> element within it that displays information about the wind
+ * @param {string} windArrowRotation the degrees by which the arrow that is pointed north should rotate
+ * @param {string} windSpeed the speed of the wind
+ * @returns a DOM element object that will be used to display information about the wind speed and direction
+ */
+function windInformation(windArrowRotation, windSpeed) {
+    const windContainer = divGenerator(['wind']);
+    const windInformationContainer = divGenerator(['wind-information']);
+    const windSpeedSpan = spanGenerator(['wind-num'], windSpeed);
+    windInformationContainer.append(imgGenerator('./../src/assets/arrow.png', 'An arrow rotated by the window direction degrees', ['wind-direction'], windArrowRotation), paragraphGenerator(['wind-speed'], 'mph', windSpeedSpan));
+    windContainer.append(headingGenerator('h5', [], 'Wind'), windInformationContainer);
+    return windContainer;
+};
+
+/**
+ * This function creates a div element, and appends a <h5></h5> and <p></p> element within it that displays the humidity percentage
+ * @param {string} humidityNumber the humidity currently 
+ * @returns a DOM element object that will be used to display the humidity percentage
+ */
+function humidityInformation(humidityNumber) {
+    const humidityContainer = divGenerator(['humidity']);
+    const humidity = spanGenerator(['humidity-number'], humidityNumber)
+    humidityContainer.append(headingGenerator('h5', [], 'Humidity'), paragraphGenerator(['humidity-percentage'], '%', humidity));
+    return humidityContainer;
+};
+
+/**
+ * This function creates a div element, and appends a <h5></h5> and <p></p> element within it that displays the uv-index
+ * @param {string} uvIndexNumber the uv-index currently
+ * @returns a DOM element object that will be used to display the uv-index
+ */
+function uvInformation(uvIndexNumber) {
+    const uvContainer = divGenerator(['uv-index']);
+    uvContainer.append(headingGenerator('h5', [], 'UV Index'), paragraphGenerator(['uv', checkCategoryOfUv(uvIndexNumber)], uvIndexNumber));
+    return uvContainer;
+};
+
+/**
+ * This function creates a div element, and appends a <h5></h5> and <p></p> element within it that displays the visibility distance
+ * @param {string} visibilityDistance the current visibility distance
+ * @returns a DOM element object that will be used to display the visibility distance
+ */
+function visibilityInformation(visibilityDistance) {
+    const visibilityContainer = divGenerator(['visibility']);
+    const visiblityDistanceSpan = spanGenerator(['visibility-num'], visibilityDistance);
+    visibilityContainer.append(headingGenerator('h5', [], 'Visibility'), paragraphGenerator(['visibility-distance'], 'km', visiblityDistanceSpan));
+    return visibilityContainer;
+};
+
+/**
+ * This function creates a div element, and appends a <h5></h5> and <p></p> element within it that displays the current cloud percentage
+ * @param {string} cloudPercentage the current cloud percentage
+ * @returns a DOM element object that will be used to display the current cloud percentage
+ */
+function cloudinessInformation(cloudPercentage) {
+    const cloudinessContainer = divGenerator(['cloudiness']);
+    const cloudinessPercentageSpan = spanGenerator(['cloudiness-num'], cloudPercentage);
+    cloudinessContainer.append(headingGenerator('h5', [], 'Cloudiness'), paragraphGenerator(['cloudiness-percentage'], '%', cloudinessPercentageSpan));
+    return cloudinessContainer;
+};
+
+/**
+ * This function creates a div element, and appends a <h5></h5> and <p></p> element within it that displays the current rain percentage
+ * @param {string} rainPercentage the current rain percentage
+ * @returns a DOM element object that will be used to display the current rain percentage
+ */
+function rainInformation(rainPercentage) {
+    const rainContainer = divGenerator(['chance-of-rain']);
+    const rainPercentageSpan = spanGenerator(['chance-of-rain-num'], rainPercentage);
+    rainContainer.append(headingGenerator('h5', [], 'Chance of Rain'), paragraphGenerator(['chance-of-rain-percentage'], '%', rainPercentageSpan));
+    return rainContainer;
+};
+
+/**
+ * This function creates a div element, and appends a <h5></h5> and <p></p> element within it that displays the sunrise time
+ * @param {string} sunriseTime the sunrise time for the day
+ * @returns a DOM element object that will be used to display the sunrise time
+ */
+function sunriseInformation(sunriseTime) {
+    const sunriseContainer = divGenerator(['sunrise']);
+    sunriseContainer.append(headingGenerator('h5', [], 'Sunrise'), paragraphGenerator(['sunrise-time'], sunriseTime));
+    return sunriseContainer;
+};
+
+/**
+ * This function creates a div element, and appends a <h5></h5> and <p></p> element within it that displays the sunset time
+ * @param {string} sunsetTime the sunset time for the day
+ * @returns a DOM element object that will be used to display the sunset time
+ */
+function sunsetInformation(sunsetTime) {
+    const sunsetContainer = divGenerator(['sunset']);
+    sunsetContainer.append(headingGenerator('h5', [], 'Sunset'), paragraphGenerator(['sunset-time'], sunsetTime));
+    return sunsetContainer;
+};
+
+/**
+ * This function creates a div element, and appends a <h5></h5> and <p></p> element within it that displays the current moon phase
+ * @param {string} moonPhase the current moon phase
+ * @returns a DOM element object that will be used to display the current moon phase
+ */
+function moonInformation(moonPhase) {
+    const moonphaseContainer = divGenerator(['moon-phase']);
+    moonphaseContainer.append(headingGenerator('h5', [], 'Moon Phase'), paragraphGenerator(['phase'], moonPhase));
+    return moonphaseContainer;
 };
 
 /**
@@ -74,56 +199,6 @@ async function onLoadDefaultWeather() {
     currentDayInformationContainer.append(extraInformationSection(windInformation(retrieveWindDegrees(londonInfo), retrieveWindSpeed(londonInfo)), humidityInformation(retrieveHumidity(londonInfo)),
         uvInformation(retrieveUvNum(londonInfo)), visibilityInformation(retrieveVisibilityDistance(londonInfo)), cloudinessInformation(retrieveCloudinessPercentage(londonInfo)), rainInformation(retrieveChanceOfRain(londonInfo)),
         sunriseInformation(retrieveSunriseTime(londonInfo)), sunsetInformation(retrieveSunsetTime(londonInfo)), moonInformation(retrieveMoonPhase(londonInfo))));
-
 };
-
-function extraInformationSection(append, append2, append3, append4, append5, append6, append7, append8, append9) {
-    const extraInformationContainer = divGenerator(['extra-information']);
-    extraInformationContainer.append(append, append2, append3, append4, append5, append6, append7, append8, append9);
-    return extraInformationContainer;
-};
-
-function windInformation(windArrowRotation, windSpeed) {
-    const windContainer = divGenerator(['wind']);
-    const windInformationContainer = divGenerator(['wind-information']);
-    const windSpeedSpan = spanGenerator(['wind-num'], windSpeed);
-    windInformationContainer.append(imgGenerator('./../src/assets/arrow.png', 'An arrow rotated by the window direction degrees', ['wind-direction'], windArrowRotation), paragraphGenerator(['wind-speed'], 'mph', windSpeedSpan));
-    windContainer.append(headingGenerator('h5', [], 'Wind'), windInformationContainer);
-    return windContainer;
-};
-
-function humidityInformation(humidityNumber) {
-    const humidityContainer = divGenerator(['humidity']);
-    const humidity = spanGenerator(['humidity-number'], humidityNumber)
-    humidityContainer.append(headingGenerator('h5', [], 'Humidity'), paragraphGenerator(['humidity-percentage'], '%', humidity));
-    return humidityContainer;
-}
-
-function uvInformation(uvIndexNumber) {
-    const uvContainer = divGenerator(['uv-index']);
-    uvContainer.append(headingGenerator('h5', [], 'UV Index'), paragraphGenerator(['uv', checkCategoryOfUv(uvIndexNumber)], uvIndexNumber));
-    return uvContainer;
-}
-
-function visibilityInformation(visibilityDistance) {
-    const visibilityContainer = divGenerator(['visibility']);
-    const visiblityDistanceSpan = spanGenerator(['visibility-num'], visibilityDistance);
-    visibilityContainer.append(headingGenerator('h5', [], 'Visibility'), paragraphGenerator(['visibility-distance'], 'km', visiblityDistanceSpan));
-    return visibilityContainer;
-}
-
-function cloudinessInformation(cloudPercentage) {
-    const cloudinessContainer = divGenerator(['cloudiness']);
-    const cloudinessPercentageSpan = spanGenerator(['cloudiness-num'], cloudPercentage);
-    cloudinessContainer.append(headingGenerator('h5', [], 'Cloudiness'), paragraphGenerator(['cloudiness-percentage'], '%', cloudinessPercentageSpan));
-    return cloudinessContainer;
-}
-
-function rainInformation(rainPercentage) {
-    const rainContainer = divGenerator(['chance-of-rain']);
-    const rainPercentageSpan = spanGenerator(['chance-of-rain-num'], rainPercentage);
-    rainContainer.append(headingGenerator('h5', [], 'Chance of Rain'), paragraphGenerator(['chance-of-rain-percentage'], '%', rainPercentageSpan));
-    return rainContainer;
-}
 
 export { currentDayInformationContainer, onLoadDefaultWeather };
