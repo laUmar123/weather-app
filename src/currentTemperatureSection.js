@@ -1,5 +1,5 @@
 import { checkCategoryOfUv, divGenerator, headingGenerator, imgGenerator, paragraphGenerator, spanGenerator } from './generatorFunctions';
-import { createStandardDate, createStandardTime, retrieveCity, retrieveCountry, retrieveDateAndTimeArr, retrieveMethodOfMeasurement, isMethodOfMeasurementCelsius, retrieveWindDegrees, retrieveWindSpeed, retrieveHumidity, retrieveUvNum, retrieveVisibilityDistance, retrieveCloudinessPercentage, retrieveChanceOfRain } from './retrieveInformation'
+import { createStandardDate, createStandardTime, retrieveCity, retrieveCountry, retrieveDateAndTimeArr, retrieveMethodOfMeasurement, isMethodOfMeasurementCelsius, retrieveWindDegrees, retrieveWindSpeed, retrieveHumidity, retrieveUvNum, retrieveVisibilityDistance, retrieveCloudinessPercentage, retrieveChanceOfRain, retrieveSunriseTime, retrieveSunsetTime, retrieveMoonPhase } from './retrieveInformation'
 
 const currentDayInformationContainer = divGenerator(['current-day-information']);
 
@@ -50,7 +50,8 @@ async function onLoadDefaultWeather() {
     currentDayInformationContainer.append(displayLocationDetails(retrieveCity(londonInfo), retrieveCountry(londonInfo), createStandardDate(retrieveDateAndTimeArr(londonInfo)[0]), createStandardTime(retrieveDateAndTimeArr(londonInfo)[1])));
     currentDayInformationContainer.append(currentTempDetailsSection(tempDetailsSection(londonInfo.current.condition.icon, londonInfo.current.temp_c), tempConditionsSection(londonInfo.current.condition.text, londonInfo.current.feelslike_c)));
     currentDayInformationContainer.append(extraInformationSection(windInformation(retrieveWindDegrees(londonInfo), retrieveWindSpeed(londonInfo)), humidityInformation(retrieveHumidity(londonInfo)),
-        uvInformation(retrieveUvNum(londonInfo)), visibilityInformation(retrieveVisibilityDistance(londonInfo)), cloudinessInformation(retrieveCloudinessPercentage(londonInfo)), rainInformation(retrieveChanceOfRain(londonInfo))));
+        uvInformation(retrieveUvNum(londonInfo)), visibilityInformation(retrieveVisibilityDistance(londonInfo)), cloudinessInformation(retrieveCloudinessPercentage(londonInfo)), rainInformation(retrieveChanceOfRain(londonInfo)),
+        sunriseInformation(retrieveSunriseTime(londonInfo)), sunsetInformation(retrieveSunsetTime(londonInfo)), moonInformation(retrieveMoonPhase(londonInfo))));
 
 };
 
@@ -105,3 +106,65 @@ function rainInformation(rainPercentage) {
 
 export { currentDayInformationContainer, onLoadDefaultWeather };
 
+/*<div class="current-day-information">
+    <div class="location-details">
+        <h2 class="city-details"><span class="city">London</span>, <span class="country">United Kingdom</span>
+        </h2>
+        <h4 class="day-details">Wednesday 10 May 2023<span class="time-details">02:41</span></h4>
+    </div>
+    <div class="current-temp-details">
+        <div class="temp-details">
+            <img class="image-weather-description" src="//cdn.weatherapi.com/weather/64x64/day/116.png">
+                <h2 class="current-temp"><span class="temp">20</span>°<span class="method-of-measurement">C</span>
+                </h2>
+        </div>
+        <div class="temp-conditions">
+            <h3 class="temp-description">Smoke</h3>
+            <h4 class="feels-like">Feels like <span class="feels-like-temp">20</span>°<span
+                class="method-of-measurement">C</span></h4>
+            <h4 class="general-description">Gentle breeze</h4>
+        </div>
+    </div>
+    <div class="extra-information">
+        <div class="wind">
+            <h5>Wind</h5>
+            <div class="wind-information">
+                <img class="wind-direction" src="./../src/assets/arrow.png"
+                    alt="An arrow rotated by the window direction degrees">
+                    <p class="wind-speed"><span class="wind-num">4</span>mph</p>
+            </div>
+        </div>
+        <div class="humidity">
+            <h5>Humidity</h5>
+            <p class="humidity-percentage"><span class="humidity-number">56</span>%</p>
+        </div>
+        <div class="uv-index">
+            <h5>UV Index</h5>
+            <p class="uv">0</p>
+        </div>
+        <div class="visibility">
+            <h5>Visibility</h5>
+            <p class="visibility-distance"><span class="visibility-num">4</span>km</p>
+        </div>
+        <div class="cloudiness">
+            <h5>Cloudiness</h5>
+            <p class="cloudiness-percentage"><span class="cloudiness-num">0</span>%</p>
+        </div>
+        <div class="chance-of-rain">
+            <h5>Chance of Rain</h5>
+            <p class="chance-of-rain-percentage"><span class="chance-of-rain-num">0</span>%</p>
+        </div>
+        <div class="sunrise">
+            <h5>Sunrise</h5>
+            <p class="sunrise-time">05:10</p>
+        </div>
+        <div class="sunset">
+            <h5>Sunset</h5>
+            <p class="sunset-time">18:10</p>
+        </div>
+        <div class="moon-phase">
+            <h5>Moon Phase</h5>
+            <p class="phase">Waning Gibbous</p>
+        </div>
+    </div>
+</div> */

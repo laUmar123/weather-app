@@ -5,7 +5,7 @@
  */
 function addClassesToElement(classes, element) {
     classes.forEach(individualClass => element.classList.add(individualClass));
-}
+};
 
 /**
  * this function generates a div element with its classes provided as an argument
@@ -16,7 +16,7 @@ function divGenerator(classes) {
     const div = document.createElement('div');
     addClassesToElement(classes, div)
     return div;
-}
+};
 
 /**
  * this function generates an img element, with the specified, src, alt and classes
@@ -32,13 +32,15 @@ function imgGenerator(src, alt = '', classes, rotation = 0) {
     addClassesToElement(classes, img);
     img.style.rotate = `${rotation}deg`
     return img;
-}
+};
 
 /**
  * this function generates a heading of the desired size, and adds the text specified as well as the classes provided
  * @param {string} headingSize 1 of 6 sizes we want the heading to be e.g. 'h1'
  * @param {Array} classes an array of classes that need to be added to the heading
  * @param {string} text the text the heading needs to display 
+ * @param {element} spanElementPreppend a dom element that we want to add before the text part of the heading
+ * @param {element} spanElementAppend a dom element that we want to add after the text part of the heading
  * @returns a heading DOM element
  */
 function headingGenerator(headingSize, classes, text, spanElementPreppend = '', spanElementAppend = '') {
@@ -48,7 +50,7 @@ function headingGenerator(headingSize, classes, text, spanElementPreppend = '', 
     heading.append(spanElementAppend)
     addClassesToElement(classes, heading);
     return heading;
-}
+};
 
 /**
  * this function generates a button with the classes and text provided
@@ -61,7 +63,7 @@ function buttonGenerator(classes, text) {
     addClassesToElement(classes, btn);
     btn.innerHTML = text;
     return btn;
-}
+};
 
 /**
  * this function generates a span element with the classes and text provided
@@ -74,7 +76,7 @@ function spanGenerator(classes, text) {
     addClassesToElement(classes, span);
     span.innerHTML = text;
     return span;
-}
+};
 
 /**
  * this function generates a form element with the classes provided
@@ -85,7 +87,7 @@ function formGenerator(classes) {
     const form = document.createElement('form');
     addClassesToElement(classes, form);
     return form;
-}
+};
 
 /**
  * this function generates an input element and adds the specified attributes and values to it
@@ -96,8 +98,16 @@ function inputGenerator(attributes) {
     const input = document.createElement('input');
     attributes.forEach(attribute => input.setAttribute(attribute[0], attribute[1]));
     return input;
-}
+};
 
+/**
+ * This function creates a paragraph element and fills it with the arguments provided
+ * @param {Array} classes an array of classes that need to be added to the form
+ * @param {string} text the text needed within the <p></p> 
+ * @param {*} spanElementPreppend a dom element that we want to add before the text part of the paragraph
+ * @param {*} spanElementAppend a dom element that we want to add after the text part of the paragraph
+ * @returns a <p></p> element that is customised as specified
+ */
 function paragraphGenerator(classes, text, spanElementPreppend = '', spanElementAppend = '') {
     const paragraph = document.createElement('p');
     addClassesToElement(classes, paragraph);
@@ -105,8 +115,13 @@ function paragraphGenerator(classes, text, spanElementPreppend = '', spanElement
     paragraph.prepend(spanElementPreppend)
     paragraph.append(spanElementAppend)
     return paragraph;
-}
+};
 
+/**
+ * This function is used to help choose the correct class based on the uv-index number provided
+ * @param {number} uvNum the number that we want to check whether or not it's value is a safe, amber or danger value 
+ * @returns a string that classifies the value
+ */
 function checkCategoryOfUv(uvNum) {
     switch (true) {
         case uvNum <= 2:
@@ -116,6 +131,6 @@ function checkCategoryOfUv(uvNum) {
         case uvNum >= 8:
             return 'danger';
     }
-}
+};
 
 export { divGenerator, imgGenerator, headingGenerator, buttonGenerator, spanGenerator, inputGenerator, formGenerator, checkCategoryOfUv, paragraphGenerator }

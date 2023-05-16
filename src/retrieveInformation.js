@@ -69,30 +69,65 @@ function isMethodOfMeasurementCelsius() {
     else if (document.querySelector('.fahrenheit-btn').classList.contains('active')) return false;
 }
 
+/**
+ * This function is used to retrieve the wind degrees from the api response
+ * @param {object} obj the object that we want to retrieve the value from 
+ * @returns a string that is the wind degrees
+ */
 function retrieveWindDegrees(obj) {
     return obj.current.wind_degree;
 };
 
+/**
+ * This function is used to retrieve the wind speed from the api response
+ * @param {object} obj the object that we want to retrieve the value from 
+ * @returns a string that is the wind speed
+ */
 function retrieveWindSpeed(obj) {
     return obj.current.wind_mph;
 };
 
+/**
+ * This function is used to retrieve the humidity from the api response
+ * @param {object} obj the object that we want to retrieve the value from 
+ * @returns a string that is the humidity
+ */
 function retrieveHumidity(obj) {
     return obj.current.humidity
 }
 
+/**
+ * This function is used to retrieve the uv-index from the api response
+ * @param {object} obj the object that we want to retrieve the value from 
+ * @returns a string that is the uv-index
+ */
 function retrieveUvNum(obj) {
     return obj.current.uv;
 }
 
+/**
+ * This function is used to retrieve the visibility distance from the api response
+ * @param {object} obj the object that we want to retrieve the value from 
+ * @returns a string that is the visibility distance
+ */
 function retrieveVisibilityDistance(obj) {
     return obj.current.vis_km;
 }
 
+/**
+ * This function is used to retrieve the cloudiness percentage from the api response
+ * @param {object} obj the object that we want to retrieve the value from 
+ * @returns a string that is the cloudiness percentage
+ */
 function retrieveCloudinessPercentage(obj) {
     return obj.current.cloud;
 }
 
+/**
+ * This function is used to retrieve the chance of rain from the api response
+ * @param {object} obj the object that we want to retrieve the value from 
+ * @returns a string that is the chance of rain
+ */
 function retrieveChanceOfRain(obj) {
     return obj.forecast.forecastday[0].day.daily_chance_of_rain;
 }
