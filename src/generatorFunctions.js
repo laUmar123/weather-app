@@ -1,7 +1,7 @@
 /**
  * this function takes an array of classes and adds those classes to the element using a forEach loop
  * @param {Array} classes an array of classes that need to be added to the element
- * @param {Element} element the element that we need to add the classes to 
+ * @param {object} element the element that we need to add the classes to 
  */
 function addClassesToElement(classes, element) {
     classes.forEach(individualClass => element.classList.add(individualClass));
@@ -39,8 +39,8 @@ function imgGenerator(src, alt = '', classes, rotation = 0) {
  * @param {string} headingSize 1 of 6 sizes we want the heading to be e.g. 'h1'
  * @param {Array} classes an array of classes that need to be added to the heading
  * @param {string} text the text the heading needs to display 
- * @param {element} spanElementPreppend a dom element that we want to add before the text part of the heading
- * @param {element} spanElementAppend a dom element that we want to add after the text part of the heading
+ * @param {object} spanElementPreppend a dom element that we want to add before the text part of the heading
+ * @param {object} spanElementAppend a dom element that we want to add after the text part of the heading
  * @returns a heading DOM element
  */
 function headingGenerator(headingSize, classes, text, spanElementPreppend = '', spanElementAppend = '') {
@@ -104,8 +104,8 @@ function inputGenerator(attributes) {
  * This function creates a paragraph element and fills it with the arguments provided
  * @param {Array} classes an array of classes that need to be added to the form
  * @param {string} text the text needed within the <p></p> 
- * @param {*} spanElementPreppend a dom element that we want to add before the text part of the paragraph
- * @param {*} spanElementAppend a dom element that we want to add after the text part of the paragraph
+ * @param {object} spanElementPreppend a dom element that we want to add before the text part of the paragraph
+ * @param {object} spanElementAppend a dom element that we want to add after the text part of the paragraph
  * @returns a <p></p> element that is customised as specified
  */
 function paragraphGenerator(classes, text, spanElementPreppend = '', spanElementAppend = '') {

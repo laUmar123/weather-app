@@ -13,7 +13,7 @@ function createStandardDate(date) {
         day: "numeric",
     };
     return new Intl.DateTimeFormat("en-GB", options).format(date.toISOString);
-}
+};
 
 /**
  * This function is called to make the time have a 0 at the start if the number before the colon is not double digits yet
@@ -22,7 +22,7 @@ function createStandardDate(date) {
  */
 function createStandardTime(time) {
     return time.padStart(5, 0);
-}
+};
 
 /**
  * This function retrieves the city value from the obj provided
@@ -31,7 +31,7 @@ function createStandardTime(time) {
  */
 function retrieveCity(obj) {
     return obj.location.name;
-}
+};
 
 /**
  * This function retrieves the country value from the obj provided
@@ -40,7 +40,7 @@ function retrieveCity(obj) {
  */
 function retrieveCountry(obj) {
     return obj.location.country;
-}
+};
 
 /**
  * This function retrieves the date and time value from the obj provided
@@ -49,7 +49,7 @@ function retrieveCountry(obj) {
  */
 function retrieveDateAndTimeArr(obj) {
     return obj.location.localtime.split(' ');
-}
+};
 
 /**
  * This functions finds whether the celsius or fahrenheit button is active so the right symbol can be displayed
@@ -58,7 +58,7 @@ function retrieveDateAndTimeArr(obj) {
 function retrieveMethodOfMeasurement() {
     if (document.querySelector('.celsius-btn').classList.contains('active')) return spanGenerator(['method-of-measurement'], 'C');
     else if (document.querySelector('.fahrenheit-btn').classList.contains('active')) return spanGenerator(['method-of-measurement'], 'F');
-}
+};
 
 /**
  * This functions finds whether the celsius or fahrenheit button is active so the right symbol can be displayed
@@ -67,7 +67,7 @@ function retrieveMethodOfMeasurement() {
 function isMethodOfMeasurementCelsius() {
     if (document.querySelector('.celsius-btn').classList.contains('active')) return true;
     else if (document.querySelector('.fahrenheit-btn').classList.contains('active')) return false;
-}
+};
 
 /**
  * This function is used to retrieve the wind degrees from the api response
@@ -94,7 +94,7 @@ function retrieveWindSpeed(obj) {
  */
 function retrieveHumidity(obj) {
     return obj.current.humidity
-}
+};
 
 /**
  * This function is used to retrieve the uv-index from the api response
@@ -103,7 +103,7 @@ function retrieveHumidity(obj) {
  */
 function retrieveUvNum(obj) {
     return obj.current.uv;
-}
+};
 
 /**
  * This function is used to retrieve the visibility distance from the api response
@@ -112,7 +112,7 @@ function retrieveUvNum(obj) {
  */
 function retrieveVisibilityDistance(obj) {
     return obj.current.vis_km;
-}
+};
 
 /**
  * This function is used to retrieve the cloudiness percentage from the api response
@@ -121,7 +121,7 @@ function retrieveVisibilityDistance(obj) {
  */
 function retrieveCloudinessPercentage(obj) {
     return obj.current.cloud;
-}
+};
 
 /**
  * This function is used to retrieve the chance of rain from the api response
@@ -130,7 +130,7 @@ function retrieveCloudinessPercentage(obj) {
  */
 function retrieveChanceOfRain(obj) {
     return obj.forecast.forecastday[0].day.daily_chance_of_rain;
-}
+};
 
 /**
  * This function is used to retrieve the sunrise time from the api response
@@ -139,7 +139,7 @@ function retrieveChanceOfRain(obj) {
  */
 function retrieveSunriseTime(obj) {
     return obj.forecast.forecastday[0].astro.sunrise;
-}
+};
 
 /**
  * This function is used to retrieve the sunset time from the api response
@@ -148,7 +148,7 @@ function retrieveSunriseTime(obj) {
  */
 function retrieveSunsetTime(obj) {
     return obj.forecast.forecastday[0].astro.sunset;
-}
+};
 
 /**
  * This function is used to retrieve the current moon phase from the api response
@@ -157,7 +157,42 @@ function retrieveSunsetTime(obj) {
  */
 function retrieveMoonPhase(obj) {
     return obj.forecast.forecastday[0].astro.moon_phase;
+};
 
+/**
+ * This function is used to retrieve the current temperature image from the api response
+ * @param {object} obj the object that we want to retrieve the value from 
+ * @returns a string that is the current temperature image
+ */
+function retrieveCurrentTempImg(obj) {
+    return obj.current.condition.icon;
+};
+
+/**
+ * This function is used to retrieve the current temperature from the api response
+ * @param {object} obj the object that we want to retrieve the value from 
+ * @returns a string that is the current temperature
+ */
+function retrieveCurrentTemp(obj) {
+    return obj.current.temp_c;
 }
 
-export { retrieveSunsetTime, retrieveMoonPhase, retrieveSunriseTime, retrieveChanceOfRain, retrieveCloudinessPercentage, retrieveVisibilityDistance, retrieveUvNum, createStandardDate, createStandardTime, retrieveCity, retrieveCountry, retrieveDateAndTimeArr, retrieveMethodOfMeasurement, isMethodOfMeasurementCelsius, retrieveWindDegrees, retrieveWindSpeed, retrieveHumidity }
+/**
+ * This function is used to retrieve the temperature that it feels like currently from the api response
+ * @param {object} obj the object that we want to retrieve the value from 
+ * @returns a string that is the current temperature it feels like
+ */
+function retrieveFeelsLikeTemp(obj) {
+    return obj.current.feelslike_c;
+}
+
+/**
+ * This function is used to retrieve the current outdoor condition from the api response
+ * @param {object} obj the object that we want to retrieve the value from 
+ * @returns a string that is the current outdoor condition
+ */
+function retrieveCurrentCondition(obj) {
+    return obj.current.condition.text;
+}
+
+export { retrieveCurrentCondition, retrieveCurrentTemp, retrieveCurrentTempImg, retrieveFeelsLikeTemp, retrieveSunsetTime, retrieveMoonPhase, retrieveSunriseTime, retrieveChanceOfRain, retrieveCloudinessPercentage, retrieveVisibilityDistance, retrieveUvNum, createStandardDate, createStandardTime, retrieveCity, retrieveCountry, retrieveDateAndTimeArr, retrieveMethodOfMeasurement, isMethodOfMeasurementCelsius, retrieveWindDegrees, retrieveWindSpeed, retrieveHumidity }

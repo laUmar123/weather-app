@@ -1,7 +1,7 @@
 import { checkCategoryOfUv, divGenerator, headingGenerator, imgGenerator, paragraphGenerator, spanGenerator } from './generatorFunctions';
-import { createStandardDate, createStandardTime, retrieveCity, retrieveCountry, retrieveDateAndTimeArr, retrieveMethodOfMeasurement, isMethodOfMeasurementCelsius, retrieveWindDegrees, retrieveWindSpeed, retrieveHumidity, retrieveUvNum, retrieveVisibilityDistance, retrieveCloudinessPercentage, retrieveChanceOfRain, retrieveSunriseTime, retrieveSunsetTime, retrieveMoonPhase } from './retrieveInformation'
+import { createStandardDate, createStandardTime, retrieveCity, retrieveCountry, retrieveDateAndTimeArr, retrieveMethodOfMeasurement, isMethodOfMeasurementCelsius, retrieveWindDegrees, retrieveWindSpeed, retrieveHumidity, retrieveUvNum, retrieveVisibilityDistance, retrieveCloudinessPercentage, retrieveChanceOfRain, retrieveSunriseTime, retrieveSunsetTime, retrieveMoonPhase, retrieveCurrentTempImg, retrieveCurrentTemp, retrieveCurrentCondition, retrieveFeelsLikeTemp } from './retrieveInformation'
 
-const currentDayInformationContainer = divGenerator(['current-day-information']);
+const currentDayInformationContainer = divGenerator(['current-day-information']); //this is the container that contains all elements that will provide information about the current moment
 
 /**
  * This function is used to create the element that will be displayed on screen to show the location and time of the city searched
@@ -22,6 +22,12 @@ function displayLocationDetails(city = '', country = '', day = '', time = '') {
     return locationDetails;
 };
 
+/**
+ * This function is used to display the current temperature along with its associated image
+ * @param {string} image this is the path to the image that needs to be displayed 
+ * @param {string} temp the string representation of the current temperature 
+ * @returns a div element that has two further elements appended within it displaying the current temperature along with its associated image
+ */
 function tempDetailsSection(image, temp) {
     const tempDetailsContainer = divGenerator(['temp-details']);
     const currentTemp = spanGenerator(['temp'], temp);
@@ -29,6 +35,12 @@ function tempDetailsSection(image, temp) {
     return tempDetailsContainer;
 };
 
+/**
+ * This function is used to display the temperature it feels like along with the outdoor conditions
+ * @param {string} description a description of outdoor conditions
+ * @param {string} feelsLikeTemp a string representation of the temperature that it feels like
+ * @returns a div element that has two further elements appended within it displaying the outdoor conditions at the current moment and the temperature it feels like
+ */
 function tempConditionsSection(description, feelsLikeTemp) {
     const tempConditionsContainer = divGenerator(['temp-conditions']);
     const feelsLikeHeader = document.createElement('h4');
@@ -38,17 +50,27 @@ function tempConditionsSection(description, feelsLikeTemp) {
     return tempConditionsContainer;
 };
 
+/**
+ * This functions job is to append the two arguments into the ucrrentTempDetails div which will then be displayed on screen
+ * @param {object} tempDetailsSection a dom element object that is the first child of the currentTempDetailsContainer
+ * @param {object} tempConditionsSection a dom element object that is the second child of the currentTempDetailsContainer
+ * @returns a dom element object contains the two arguments passed as children
+ */
 function currentTempDetailsSection(tempDetailsSection, tempConditionsSection) {
     const currentTempDetailsContainer = divGenerator(['current-temp-details']);
+    console.log(typeof currentTempDetailsContainer);
     currentTempDetailsContainer.append(tempDetailsSection, tempConditionsSection);
     return currentTempDetailsContainer;
 };
 
+/**
+ * This function is to be used when the webpage is loaded up and it fills the webpage with the required information with the default city being london
+ */
 async function onLoadDefaultWeather() {
     const response = await fetch('https://api.weatherapi.com/v1/forecast.json?key=d26a8a90752f45c2a03154907230505&q=london&days=7&aqi=no&alerts=no', { mode: 'cors' });
     const londonInfo = await response.json();
     currentDayInformationContainer.append(displayLocationDetails(retrieveCity(londonInfo), retrieveCountry(londonInfo), createStandardDate(retrieveDateAndTimeArr(londonInfo)[0]), createStandardTime(retrieveDateAndTimeArr(londonInfo)[1])));
-    currentDayInformationContainer.append(currentTempDetailsSection(tempDetailsSection(londonInfo.current.condition.icon, londonInfo.current.temp_c), tempConditionsSection(londonInfo.current.condition.text, londonInfo.current.feelslike_c)));
+    currentDayInformationContainer.append(currentTempDetailsSection(tempDetailsSection(retrieveCurrentTempImg(londonInfo), retrieveCurrentTemp(londonInfo)), tempConditionsSection(retrieveCurrentCondition(londonInfo), retrieveFeelsLikeTemp(londonInfo))));
     currentDayInformationContainer.append(extraInformationSection(windInformation(retrieveWindDegrees(londonInfo), retrieveWindSpeed(londonInfo)), humidityInformation(retrieveHumidity(londonInfo)),
         uvInformation(retrieveUvNum(londonInfo)), visibilityInformation(retrieveVisibilityDistance(londonInfo)), cloudinessInformation(retrieveCloudinessPercentage(londonInfo)), rainInformation(retrieveChanceOfRain(londonInfo)),
         sunriseInformation(retrieveSunriseTime(londonInfo)), sunsetInformation(retrieveSunsetTime(londonInfo)), moonInformation(retrieveMoonPhase(londonInfo))));
@@ -105,66 +127,3 @@ function rainInformation(rainPercentage) {
 }
 
 export { currentDayInformationContainer, onLoadDefaultWeather };
-
-/*<div class="current-day-information">
-    <div class="location-details">
-        <h2 class="city-details"><span class="city">London</span>, <span class="country">United Kingdom</span>
-        </h2>
-        <h4 class="day-details">Wednesday 10 May 2023<span class="time-details">02:41</span></h4>
-    </div>
-    <div class="current-temp-details">
-        <div class="temp-details">
-            <img class="image-weather-description" src="//cdn.weatherapi.com/weather/64x64/day/116.png">
-                <h2 class="current-temp"><span class="temp">20</span>°<span class="method-of-measurement">C</span>
-                </h2>
-        </div>
-        <div class="temp-conditions">
-            <h3 class="temp-description">Smoke</h3>
-            <h4 class="feels-like">Feels like <span class="feels-like-temp">20</span>°<span
-                class="method-of-measurement">C</span></h4>
-            <h4 class="general-description">Gentle breeze</h4>
-        </div>
-    </div>
-    <div class="extra-information">
-        <div class="wind">
-            <h5>Wind</h5>
-            <div class="wind-information">
-                <img class="wind-direction" src="./../src/assets/arrow.png"
-                    alt="An arrow rotated by the window direction degrees">
-                    <p class="wind-speed"><span class="wind-num">4</span>mph</p>
-            </div>
-        </div>
-        <div class="humidity">
-            <h5>Humidity</h5>
-            <p class="humidity-percentage"><span class="humidity-number">56</span>%</p>
-        </div>
-        <div class="uv-index">
-            <h5>UV Index</h5>
-            <p class="uv">0</p>
-        </div>
-        <div class="visibility">
-            <h5>Visibility</h5>
-            <p class="visibility-distance"><span class="visibility-num">4</span>km</p>
-        </div>
-        <div class="cloudiness">
-            <h5>Cloudiness</h5>
-            <p class="cloudiness-percentage"><span class="cloudiness-num">0</span>%</p>
-        </div>
-        <div class="chance-of-rain">
-            <h5>Chance of Rain</h5>
-            <p class="chance-of-rain-percentage"><span class="chance-of-rain-num">0</span>%</p>
-        </div>
-        <div class="sunrise">
-            <h5>Sunrise</h5>
-            <p class="sunrise-time">05:10</p>
-        </div>
-        <div class="sunset">
-            <h5>Sunset</h5>
-            <p class="sunset-time">18:10</p>
-        </div>
-        <div class="moon-phase">
-            <h5>Moon Phase</h5>
-            <p class="phase">Waning Gibbous</p>
-        </div>
-    </div>
-</div> */
