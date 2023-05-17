@@ -16,6 +16,16 @@ function createStandardDate(date) {
 };
 
 /**
+ * This function takes a date and converts it to en-GB locale form
+ * @param {string} dateToConvert a string representation of a date that we want to convert into the GB standard 
+ * @returns a string that displays the date in the en-GB locale form
+ */
+function createShortStandardDate(dateToConvert) {
+    const date = new Date(dateToConvert)
+    return new Intl.DateTimeFormat("en-GB").format(date.getTime());
+}
+
+/**
  * This function is called to make the time have a 0 at the start if the number before the colon is not double digits yet
  * @param {string} time the time that needs to be padded
  * @returns a padded version of the time, e.g. if its 1:11 it gets changed to 01:11
@@ -198,4 +208,73 @@ function retrieveCurrentCondition(obj) {
     return obj.current.condition.text;
 }
 
-export { retrieveCurrentCondition, retrieveCurrentTemp, retrieveCurrentTempImg, retrieveFeelsLikeTemp, retrieveSunsetTime, retrieveMoonPhase, retrieveSunriseTime, retrieveChanceOfRain, retrieveCloudinessPercentage, retrieveVisibilityDistance, retrieveUvNum, createStandardDate, createStandardTime, retrieveCity, retrieveCountry, retrieveDateAndTimeArr, retrieveMethodOfMeasurement, isMethodOfMeasurementCelsius, retrieveWindDegrees, retrieveWindSpeed, retrieveHumidity }
+//These functions are used to retrieve the values for the weekly forecast
+/**
+ * This function takes a number ranging from 0-6 and then return the weekday name
+ * @param {number} dateToFindDay a number that represents the day of the week e.g. 0 represents Sunday
+ * @returns a string value that is the corresponding day of the week
+ */
+function retrieveDayOfTheWeek(dateToFindDay) {
+    const date = new Date(dateToFindDay);
+    const day = date.getDay();
+    switch (day) {
+        case 0:
+            return 'Sunday';
+        case 1:
+            return 'Monday';
+        case 2:
+            return 'Tuesday';
+        case 3:
+            return 'Wednesday';
+        case 4:
+            return 'Thursday';
+        case 5:
+            return 'Friday';
+        case 6:
+            return 'Saturday';
+        case 7:
+            return 'Unknown day';
+    };
+};
+
+/**
+ * This function is used to retrieve the date based on the day we specified, and from the object we provided
+ * @param {number} day the day of the week
+ * @param {object} obj the object from which we need to retrieve the date from 
+ * @returns a string value that contains the date
+ */
+export function getDate(day, obj) {
+    return obj.forecast.forecastday[day].date;
+};
+
+/**
+ * This function is used to retrieve the maximum temperature based on the day of the week provided from the object provided
+ * @param {number} dayOfWeek the day of the week
+ * @param {object} obj the object from which we need to retrieve the maximum temperature from 
+ * @returns a string value that is the maximum temperature for that given day
+ */
+export function getDayMaxTemp(dayOfWeek, obj) {
+    return Math.round(Number(obj.forecast.forecastday[dayOfWeek].day.maxtemp_c));
+}
+
+/**
+ * This function is used to retrieve the minimum temperature based on the day of the week provided from the object provided
+ * @param {number} dayOfWeek the day of the week
+ * @param {object} obj the object from which we need to retrieve the minimum temperature from 
+ * @returns a string value that is the minimum temperature for that given day
+ */
+export function getDayMinTemp(dayOfWeek, obj) {
+    return Math.round(Number(obj.forecast.forecastday[dayOfWeek].day.mintemp_c));
+};
+
+/**
+ * This function is used to retrieve the corresponding whether image from the day of the week provided from the object provided
+ * @param {number} dayOfWeek the day of the week
+ * @param {object} obj the object from which we need to retrieve the date from 
+ * @returns a string value that is the path to the image
+ */
+export function getDayWeatherImage(dayOfWeek, obj) {
+    return obj.forecast.forecastday[dayOfWeek].day.condition.icon;
+}
+
+export { createShortStandardDate, retrieveDayOfTheWeek, retrieveCurrentCondition, retrieveCurrentTemp, retrieveCurrentTempImg, retrieveFeelsLikeTemp, retrieveSunsetTime, retrieveMoonPhase, retrieveSunriseTime, retrieveChanceOfRain, retrieveCloudinessPercentage, retrieveVisibilityDistance, retrieveUvNum, createStandardDate, createStandardTime, retrieveCity, retrieveCountry, retrieveDateAndTimeArr, retrieveMethodOfMeasurement, isMethodOfMeasurementCelsius, retrieveWindDegrees, retrieveWindSpeed, retrieveHumidity }

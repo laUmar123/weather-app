@@ -1,5 +1,6 @@
 import { checkCategoryOfUv, divGenerator, headingGenerator, imgGenerator, paragraphGenerator, spanGenerator } from './generatorFunctions';
-import { createStandardDate, createStandardTime, retrieveCity, retrieveCountry, retrieveDateAndTimeArr, retrieveMethodOfMeasurement, isMethodOfMeasurementCelsius, retrieveWindDegrees, retrieveWindSpeed, retrieveHumidity, retrieveUvNum, retrieveVisibilityDistance, retrieveCloudinessPercentage, retrieveChanceOfRain, retrieveSunriseTime, retrieveSunsetTime, retrieveMoonPhase, retrieveCurrentTempImg, retrieveCurrentTemp, retrieveCurrentCondition, retrieveFeelsLikeTemp } from './retrieveInformation'
+import { createStandardDate, createStandardTime, retrieveCity, retrieveCountry, retrieveDateAndTimeArr, retrieveMethodOfMeasurement, isMethodOfMeasurementCelsius, retrieveWindDegrees, retrieveWindSpeed, retrieveHumidity, retrieveUvNum, retrieveVisibilityDistance, retrieveCloudinessPercentage, retrieveChanceOfRain, retrieveSunriseTime, retrieveSunsetTime, retrieveMoonPhase, retrieveCurrentTempImg, retrieveCurrentTemp, retrieveCurrentCondition, retrieveFeelsLikeTemp, getDate, getDayMaxTemp, getDayMinTemp, getDayWeatherImage } from './retrieveInformation'
+import { dailyWeatherSection, dayInformation, dayWeather, dayWeatherDetails } from './weeklyWeather';
 
 const currentDayInformationContainer = divGenerator(['current-day-information']); //this is the container that contains all elements that will provide information about the current moment
 

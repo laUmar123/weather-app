@@ -56,12 +56,18 @@ function headingGenerator(headingSize, classes, text, spanElementPreppend = '', 
  * this function generates a button with the classes and text provided
  * @param {Array} classes an array of classes that need to be added to the heading
  * @param {string} text the text needed within the button 
+ * @param {string} id the id we want to assign to the button
+ * @param {object} spanElementPreppend a dom element that we want to add before the text part of the button
+ * @param {object} spanElementAppend a dom element that we want to add after the text part of the button
  * @returns a button element
  */
-function buttonGenerator(classes, text) {
+function buttonGenerator(classes, text, id = '', spanElementPreppend = '', spanElementAppend = '') {
     const btn = document.createElement('button');
     addClassesToElement(classes, btn);
     btn.innerHTML = text;
+    btn.id = id;
+    btn.prepend(spanElementPreppend);
+    btn.append(spanElementAppend);
     return btn;
 };
 
