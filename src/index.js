@@ -4,7 +4,7 @@ import { onLoadDefaultWeather, currentDayInformationContainer } from './currentT
 import { divGenerator } from './generatorFunctions';
 import { carouselButtons } from './carouselButtons';
 
-const dailyHourlyWeather = divGenerator(['daily-hourly-weather-carousel']); //the div that will contain the daily weather, and the hourly weather
+const dailyHourlyWeather = divGenerator(['daily-hourly-weather-carousel']); //the div that will contain the daily weather, and the hourly
 dailyHourlyWeather.append(carouselButtons());
 
 document.body.append(header(), currentDayInformationContainer, dailyHourlyWeather);

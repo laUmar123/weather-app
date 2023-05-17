@@ -200,6 +200,13 @@ async function onLoadDefaultWeather() {
     currentDayInformationContainer.append(extraInformationSection(windInformation(retrieveWindDegrees(londonInfo), retrieveWindSpeed(londonInfo)), humidityInformation(retrieveHumidity(londonInfo)),
         uvInformation(retrieveUvNum(londonInfo)), visibilityInformation(retrieveVisibilityDistance(londonInfo)), cloudinessInformation(retrieveCloudinessPercentage(londonInfo)), rainInformation(retrieveChanceOfRain(londonInfo)),
         sunriseInformation(retrieveSunriseTime(londonInfo)), sunsetInformation(retrieveSunsetTime(londonInfo)), moonInformation(retrieveMoonPhase(londonInfo))));
+    document.querySelector('.daily-hourly-weather-carousel').append(dailyWeatherSection(dayWeather(0, dayInformation(getDate(0, londonInfo)), dayWeatherDetails(getDayMaxTemp(0, londonInfo), getDayMinTemp(0, londonInfo)), getDayWeatherImage(0, londonInfo)),
+        dayWeather(1, dayInformation(getDate(1, londonInfo)), dayWeatherDetails(getDayMaxTemp(1, londonInfo), getDayMinTemp(1, londonInfo)), getDayWeatherImage(1, londonInfo)),
+        dayWeather(2, dayInformation(getDate(2, londonInfo)), dayWeatherDetails(getDayMaxTemp(2, londonInfo), getDayMinTemp(2, londonInfo)), getDayWeatherImage(2, londonInfo)),
+        dayWeather(3, dayInformation(getDate(3, londonInfo)), dayWeatherDetails(getDayMaxTemp(3, londonInfo), getDayMinTemp(3, londonInfo)), getDayWeatherImage(3, londonInfo)),
+        dayWeather(4, dayInformation(getDate(4, londonInfo)), dayWeatherDetails(getDayMaxTemp(4, londonInfo), getDayMinTemp(4, londonInfo)), getDayWeatherImage(4, londonInfo)),
+        dayWeather(5, dayInformation(getDate(5, londonInfo)), dayWeatherDetails(getDayMaxTemp(5, londonInfo), getDayMinTemp(5, londonInfo)), getDayWeatherImage(5, londonInfo)),
+        dayWeather(6, dayInformation(getDate(6, londonInfo)), dayWeatherDetails(getDayMaxTemp(6, londonInfo), getDayMinTemp(6, londonInfo)), getDayWeatherImage(6, londonInfo))));
 };
 
 export { currentDayInformationContainer, onLoadDefaultWeather };
