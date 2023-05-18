@@ -196,7 +196,7 @@ function retrieveCurrentTemp(obj) {
  * @returns a string that is the current temperature it feels like
  */
 function retrieveFeelsLikeTemp(obj) {
-    return obj.current.feelslike_c;
+    return Math.round(Number(obj.current.feelslike_c));
 }
 
 /**
@@ -277,4 +277,45 @@ export function getDayWeatherImage(dayOfWeek, obj) {
     return obj.forecast.forecastday[dayOfWeek].day.condition.icon;
 }
 
-export { createShortStandardDate, retrieveDayOfTheWeek, retrieveCurrentCondition, retrieveCurrentTemp, retrieveCurrentTempImg, retrieveFeelsLikeTemp, retrieveSunsetTime, retrieveMoonPhase, retrieveSunriseTime, retrieveChanceOfRain, retrieveCloudinessPercentage, retrieveVisibilityDistance, retrieveUvNum, createStandardDate, createStandardTime, retrieveCity, retrieveCountry, retrieveDateAndTimeArr, retrieveMethodOfMeasurement, isMethodOfMeasurementCelsius, retrieveWindDegrees, retrieveWindSpeed, retrieveHumidity }
+//These functions are used for the hourly weather section
+/**
+ * This function gets the time based on the hourNum value, and manipulates the time to display without the AM or PM
+ * @param {number} hourNum a number the corresponds to a certain hour, e.g. 0 corresponds to 12am
+ * @param {object} obj the object from which we need to retrieve the date from 
+ * @returns a string value that is the time that corresponds to the hourNum argument passed
+ */
+function getHourTime(hourNum, obj) {
+    return obj.forecast.forecastday[0].hour[hourNum].time.slice(-5);
+};
+
+/**
+ * This function gets the temperature based on the hourNum value, and manipulates the temperature to be rounded
+ * @param {number} hourNum a number the corresponds to a certain hour, e.g. 0 corresponds to 12am
+ * @param {object} obj the object from which we need to retrieve the date from 
+ * @returns a number value that is the temperature in celsius and has been rounded
+ */
+function getHourTemp(hourNum, obj) {
+    return Math.round(Number(obj.forecast.forecastday[0].hour[hourNum].temp_c));
+};
+
+/**
+ * This function gets the weather description based on the hourNum value
+ * @param {number} hourNum a number the corresponds to a certain hour, e.g. 0 corresponds to 12am
+ * @param {object} obj the object from which we need to retrieve the date from 
+ * @returns astring value that is the weather conditions at that certain hour
+ */
+function getHourTempDescription(hourNum, obj) {
+    return obj.forecast.forecastday[0].hour[hourNum].condition.text;
+};
+
+/**
+ * This function gets the correct icon based on the hourNum value
+ * @param {number} hourNum a number the corresponds to a certain hour, e.g. 0 corresponds to 12am
+ * @param {object} obj the object from which we need to retrieve the date from 
+ * @returns a string value that is the path to the image that corresponds with the weather for that hour
+ */
+function getHourTempIcon(hourNum, obj) {
+    return obj.forecast.forecastday[0].hour[hourNum].condition.icon;
+};
+
+export { getHourTime, getHourTemp, getHourTempDescription, getHourTempIcon, createShortStandardDate, retrieveDayOfTheWeek, retrieveCurrentCondition, retrieveCurrentTemp, retrieveCurrentTempImg, retrieveFeelsLikeTemp, retrieveSunsetTime, retrieveMoonPhase, retrieveSunriseTime, retrieveChanceOfRain, retrieveCloudinessPercentage, retrieveVisibilityDistance, retrieveUvNum, createStandardDate, createStandardTime, retrieveCity, retrieveCountry, retrieveDateAndTimeArr, retrieveMethodOfMeasurement, isMethodOfMeasurementCelsius, retrieveWindDegrees, retrieveWindSpeed, retrieveHumidity }
