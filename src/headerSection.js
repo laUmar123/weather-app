@@ -30,13 +30,19 @@ function headerButtons() {
     return buttonsContainer;
 };
 
+function errorPopup() {
+    const errorContainer = divGenerator(['error-popup', 'hide']);
+    errorContainer.append(headingGenerator('h2', ['error-message'], ''));
+    return errorContainer;
+};
+
 /**
  * This function is used to create the header with all of its content
  * @returns A DOM element object the contains everything needed in the header
  */
 export function header() {
     const header = document.createElement('header');
-    header.append(titleSection(), headerFormSection(), headerButtons());
+    header.append(titleSection(), headerFormSection(), errorPopup(), headerButtons());
     return header;
 };
 

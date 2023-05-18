@@ -19,7 +19,6 @@ const dotsContainer = document.querySelector('.dots'); //the container that hold
 const changeDegreesContainer = document.querySelector('.change-degrees'); //the container that holds the celsius and fahrenheit buttons
 
 
-
 dailyWeatherButton.addEventListener('click', dailyAndHourlyButtonLogic);
 hourlyWeatherButton.addEventListener('click', dailyAndHourlyButtonLogic);
 moveForwardButton.addEventListener('click', moveForwardButtonLogic);

@@ -196,13 +196,37 @@ function moonInformation(moonPhase) {
 async function onLoadDefaultWeather() {
     const response = await fetch('https://api.weatherapi.com/v1/forecast.json?key=d26a8a90752f45c2a03154907230505&q=london&days=7&aqi=no&alerts=no', { mode: 'cors' });
     const londonInfo = await response.json();
-    currentDayInformationContainer.append(displayLocationDetails(retrieveCity(londonInfo), retrieveCountry(londonInfo), createStandardDate(retrieveDateAndTimeArr(londonInfo)[0]), createStandardTime(retrieveDateAndTimeArr(londonInfo)[1])));
-    currentDayInformationContainer.append(currentTempDetailsSection(tempDetailsSection(retrieveCurrentTempImg(londonInfo), retrieveCurrentTemp(londonInfo)), tempConditionsSection(retrieveCurrentCondition(londonInfo), retrieveFeelsLikeTemp(londonInfo))));
-    currentDayInformationContainer.append(extraInformationSection(windInformation(retrieveWindDegrees(londonInfo), retrieveWindSpeed(londonInfo)), humidityInformation(retrieveHumidity(londonInfo)),
-        uvInformation(retrieveUvNum(londonInfo)), visibilityInformation(retrieveVisibilityDistance(londonInfo)), cloudinessInformation(retrieveCloudinessPercentage(londonInfo)), rainInformation(retrieveChanceOfRain(londonInfo)),
-        sunriseInformation(retrieveSunriseTime(londonInfo)), sunsetInformation(retrieveSunsetTime(londonInfo)), moonInformation(retrieveMoonPhase(londonInfo))));
-    document.querySelector('.daily-hourly-weather-carousel').append(dailyWeatherSection(createAllDaysToDisplay(londonInfo)));
-    document.querySelector('.daily-hourly-weather-carousel').append(hourlyWeather(createAnArrayOfAllHours(londonInfo)));
+    currentDayInformationContainer.append(generateLocationDetails(londonInfo), generateCurrentTempDetails(londonInfo), fillInExtraInformation(londonInfo));
+    document.querySelector('.daily-hourly-weather-carousel').append(dailyWeatherSection(createAllDaysToDisplay(londonInfo)), hourlyWeather(createAnArrayOfAllHours(londonInfo)));
+};
+
+/**
+ * This function takes values and applies the correct classes to them so that they display on screen as intended
+ * @param {object} obj the object from which we will be retrieving information 
+ * @returns a DOM element object that contains all the relevant location details that need to be displayed on screen
+ */
+function generateLocationDetails(obj) {
+    return displayLocationDetails(retrieveCity(obj), retrieveCountry(obj), createStandardDate(retrieveDateAndTimeArr(obj)[0]), createStandardTime(retrieveDateAndTimeArr(obj)[1]));
+};
+
+/**
+ * This function takes values and applies the correct classes to them so that they display on screen as intended
+ * @param {object} obj the object from which we will be retrieving information 
+ * @returns a DOM element object that contains all the relevant temperature details that need to be displayed on screen
+ */
+function generateCurrentTempDetails(obj) {
+    return currentTempDetailsSection(tempDetailsSection(retrieveCurrentTempImg(obj), retrieveCurrentTemp(obj)), tempConditionsSection(retrieveCurrentCondition(obj), retrieveFeelsLikeTemp(obj)))
+};
+
+/**
+ * This function takes values and applies the correct classes to them so that they display on screen as intended
+ * @param {object} obj the object from which we will be retrieving information 
+ * @returns a DOM element object that contains all the relevant extra details to do with the current weather on screen
+ */
+function fillInExtraInformation(obj) {
+    return extraInformationSection(windInformation(retrieveWindDegrees(obj), retrieveWindSpeed(obj)), humidityInformation(retrieveHumidity(obj)),
+        uvInformation(retrieveUvNum(obj)), visibilityInformation(retrieveVisibilityDistance(obj)), cloudinessInformation(retrieveCloudinessPercentage(obj)), rainInformation(retrieveChanceOfRain(obj)),
+        sunriseInformation(retrieveSunriseTime(obj)), sunsetInformation(retrieveSunsetTime(obj)), moonInformation(retrieveMoonPhase(obj)))
 };
 
 export { currentDayInformationContainer, onLoadDefaultWeather };

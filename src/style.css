@@ -33,7 +33,8 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 1.5rem
+    padding: 1rem 1.5rem;
+    position: relative;
 }
 
 .title {
@@ -400,6 +401,26 @@ input[type="search"]::-webkit-search-results-decoration {
     height: 7rem;
     width: 7rem;
     align-self: flex-start;
+}
+
+.error-popup {
+    width: max-content;
+    border-radius: 999px;
+    background-color: white;
+    position: absolute;
+    top: 85px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+}
+
+.error-message {
+    color: red;
+    font-weight: 600;
 }
 
 .hide {
