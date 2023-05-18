@@ -229,4 +229,28 @@ function fillInExtraInformation(obj) {
         sunriseInformation(retrieveSunriseTime(obj)), sunsetInformation(retrieveSunsetTime(obj)), moonInformation(retrieveMoonPhase(obj)))
 };
 
-export { currentDayInformationContainer, onLoadDefaultWeather };
+/**
+ * This is the logic behind the search bar, it checks for keyboard press and mouse click, and displays an error message if there's an error, otherwise it repopulates the relevants containers with information about the city's weather
+ * @param {object} e the event object that contains information about the event that just took place
+ */
+async function searchLogic(e) {
+    if ((e.key === "Enter" && e.target.value !== "") || (e.target.classList.contains('search-button') && e.target.previousElementSibling !== '')) {
+        e.preventDefault();
+        const respone = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=d26a8a90752f45c2a03154907230505&q=${e.target.value || e.target.previousElementSibling.value}&days=7&aqi=no&alerts=no`);
+        const result = await respone.json();
+        if (result.error?.code === 1006) {
+            document.querySelector('.error-popup').classList.remove('hide');
+            document.querySelector('.error-message').innerText = result.error.message;
+        } else {
+            document.querySelector('.error-popup').classList.add('hide');
+            document.querySelector('#search-bar').value = '';
+            Array.from(currentDayInformationContainer.children).forEach(child => child.remove());
+            document.querySelector('.daily-weather-container').remove();
+            document.querySelector('.hourly-weather-container').remove();
+            currentDayInformationContainer.append(generateLocationDetails(result), generateCurrentTempDetails(result), fillInExtraInformation(result));
+            document.querySelector('.daily-hourly-weather-carousel').append(dailyWeatherSection(createAllDaysToDisplay(result)), hourlyWeather(createAnArrayOfAllHours(result)));
+        };
+    };
+};
+
+export { currentDayInformationContainer, onLoadDefaultWeather, searchLogic };
