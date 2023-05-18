@@ -1,4 +1,5 @@
 import { checkCategoryOfUv, divGenerator, headingGenerator, imgGenerator, paragraphGenerator, spanGenerator } from './generatorFunctions';
+import { createAnArrayOfAllHours, hourlyWeather } from './hourlyWeather';
 import { createStandardDate, createStandardTime, retrieveCity, retrieveCountry, retrieveDateAndTimeArr, retrieveMethodOfMeasurement, isMethodOfMeasurementCelsius, retrieveWindDegrees, retrieveWindSpeed, retrieveHumidity, retrieveUvNum, retrieveVisibilityDistance, retrieveCloudinessPercentage, retrieveChanceOfRain, retrieveSunriseTime, retrieveSunsetTime, retrieveMoonPhase, retrieveCurrentTempImg, retrieveCurrentTemp, retrieveCurrentCondition, retrieveFeelsLikeTemp } from './retrieveInformation'
 import { dailyWeatherSection, createAllDaysToDisplay } from './weeklyWeather';
 
@@ -201,6 +202,7 @@ async function onLoadDefaultWeather() {
         uvInformation(retrieveUvNum(londonInfo)), visibilityInformation(retrieveVisibilityDistance(londonInfo)), cloudinessInformation(retrieveCloudinessPercentage(londonInfo)), rainInformation(retrieveChanceOfRain(londonInfo)),
         sunriseInformation(retrieveSunriseTime(londonInfo)), sunsetInformation(retrieveSunsetTime(londonInfo)), moonInformation(retrieveMoonPhase(londonInfo))));
     document.querySelector('.daily-hourly-weather-carousel').append(dailyWeatherSection(createAllDaysToDisplay(londonInfo)));
+    document.querySelector('.daily-hourly-weather-carousel').append(hourlyWeather(createAnArrayOfAllHours(londonInfo)));
 };
 
 export { currentDayInformationContainer, onLoadDefaultWeather };
