@@ -346,6 +346,7 @@ input[type="search"]::-webkit-search-results-decoration {
 .date-of-the-week {
     border-left: 1px solid var(--faded-white);
     padding-left: 10px;
+    font-size: 1.6rem;
 }
 
 .day-weather-details {
