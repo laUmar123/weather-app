@@ -1,4 +1,4 @@
-# weather-app
+# weather-app https://laumar123.github.io/weather-app/dist/
 This is a weather app that uses the OpenWeather API and allows the user to search a city, and have its weather forecast be displayed. 
 
 ## Featurers
