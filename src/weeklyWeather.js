@@ -60,7 +60,7 @@ function dayWeatherDetails(dayMaxTemp, dayMinTemp) {
  */
 function createAllDaysToDisplay(obj) {
     const arrOfDays = [];
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < 3; i++) {
         arrOfDays.push(dayWeather(i, dayInformation(getDate(i, obj)), dayWeatherDetails(getDayMaxTemp(i, obj), getDayMinTemp(i, obj)), getDayWeatherImage(i, obj)));
     };
     return arrOfDays;
