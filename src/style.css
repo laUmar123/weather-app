@@ -20,11 +20,11 @@
 
 body {
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     background: linear-gradient(to bottom, var(--light-blue), var(--dark-blue));
     color: white;
     display: grid;
-    grid-template-rows: 0.5fr 5fr 5fr 0.5fr;
+    grid-template-rows: 0.5fr 5fr 5fr;
     row-gap: 2rem;
 }
 
